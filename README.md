@@ -1,1 +1,7 @@
-# Local-Weather
+# Local Weather
+
+A simple one-view controller app which displays the weather for the users' location
+
+test
+
+![Screenshot](screenshot.jpeg)
