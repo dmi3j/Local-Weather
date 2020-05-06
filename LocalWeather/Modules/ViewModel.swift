@@ -15,13 +15,3 @@ public protocol ViewDelegate: class {
 public protocol ViewModel: class {
 
 }
-
-extension ViewDelegate where Self: UIViewController {
-
-    func show(message: String) {
-        let alertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
-        let okButtonAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
-        alertController.addAction(okButtonAction)
-        present(alertController, animated: true)
-    }
-}

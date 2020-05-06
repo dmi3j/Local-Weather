@@ -1,20 +1,11 @@
 //  Copyright © 2020 Dmitrijs Beloborodovs. All rights reserved.
 
 import UIKit
-import CoreLocation
 
 class CurrentViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     private let refreshControl = UIRefreshControl()
-
-    private lazy var locationManager: CLLocationManager = {
-        let locationManager = CLLocationManager()
-        locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyKilometer
-        locationManager.requestWhenInUseAuthorization()
-        return locationManager
-    }()
 
     var viewModel: CurrentViewModel? {
         didSet {
@@ -45,11 +36,7 @@ private extension CurrentViewController {
     }
 
     func updateLocation() {
-        if CLLocationManager.locationServicesEnabled() {
-            locationManager.startUpdatingLocation()
-        } else {
-            locationManager.requestWhenInUseAuthorization()
-        }
+        viewModel?.requestLocationUpdate()
     }
 }
 
@@ -83,19 +70,10 @@ extension CurrentViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.row == 0 {
-            return view.frame.size.height
+            return view.frame.size.height - view.safeAreaInsets.top - view.safeAreaInsets.bottom
         } else {
             return UITableView.automaticDimension
         }
-    }
-}
-extension CurrentViewController: CLLocationManagerDelegate {
-
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let currentPosition = locations.first else { return }
-        viewModel?.getForecastFor(latitude: currentPosition.coordinate.latitude,
-                                  longitude: currentPosition.coordinate.longitude)
-        manager.stopUpdatingLocation()
     }
 }
 
@@ -107,6 +85,21 @@ extension CurrentViewController: CurrentViewDelegate {
 
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
+        }
+    }
+
+    func show(message: String) {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+
+            if self.refreshControl.isRefreshing {
+                self.refreshControl.endRefreshing()
+                self.tableView.contentOffset = CGPoint(x: 0, y: 0)
+            }
+            let alertController = UIAlertController(title: "Information", message: message, preferredStyle: .alert)
+            let okButtonAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+            alertController.addAction(okButtonAction)
+            self.present(alertController, animated: true)
         }
     }
 }

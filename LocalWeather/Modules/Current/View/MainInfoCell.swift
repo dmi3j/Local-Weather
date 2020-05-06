@@ -15,7 +15,7 @@ class MainInfoCell: UITableViewCell {
             summaryLabel.text = data.summary
             temperatureLabel.text = data.temperature
             
-            if let image = UIImage(named: data.iconName) {
+            if data.iconName.isEmpty == false, let image = UIImage(named: data.iconName) {
                 iconImageView.image = image
             } else {
                 iconImageView.image = #imageLiteral(resourceName: "unknown")
