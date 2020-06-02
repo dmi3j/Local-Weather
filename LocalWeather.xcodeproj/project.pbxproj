@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BCB3A09C246BEB0200525132 /* ScrollableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB3A09B246BEB0200525132 /* ScrollableCell.swift */; };
+		BCB3A09E246BEB7A00525132 /* DataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB3A09D246BEB7A00525132 /* DataCell.swift */; };
 		BCD88F24246170040033CF1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD88F23246170040033CF1E /* AppDelegate.swift */; };
 		BCD88F2D246170080033CF1E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BCD88F2C246170080033CF1E /* Assets.xcassets */; };
 		BCD88F30246170080033CF1E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCD88F2E246170080033CF1E /* LaunchScreen.storyboard */; };
@@ -27,6 +29,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BCB3A09B246BEB0200525132 /* ScrollableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollableCell.swift; sourceTree = "<group>"; };
+		BCB3A09D246BEB7A00525132 /* DataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCell.swift; sourceTree = "<group>"; };
 		BCD88F20246170040033CF1E /* LocalWeather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalWeather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BCD88F23246170040033CF1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BCD88F2C246170080033CF1E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -134,6 +138,8 @@
 				BCD88F4A2461888D0033CF1E /* CurrentViewController.swift */,
 				BCD88F4E246193DD0033CF1E /* MainInfoCell.swift */,
 				BCD88F50246193F80033CF1E /* MinorInfoCell.swift */,
+				BCB3A09B246BEB0200525132 /* ScrollableCell.swift */,
+				BCB3A09D246BEB7A00525132 /* DataCell.swift */,
 				BCD88F4C246188990033CF1E /* Current.storyboard */,
 			);
 			path = View;
@@ -229,6 +235,8 @@
 			files = (
 				BCD88F4B2461888D0033CF1E /* CurrentViewController.swift in Sources */,
 				BCD88F472461827A0033CF1E /* Forecast.swift in Sources */,
+				BCB3A09C246BEB0200525132 /* ScrollableCell.swift in Sources */,
+				BCB3A09E246BEB7A00525132 /* DataCell.swift in Sources */,
 				BCD88F38246170BA0033CF1E /* Coordinator.swift in Sources */,
 				BCD88F5824619C0E0033CF1E /* WeatherMainInfo.swift in Sources */,
 				BCD88F3C24617BCB0033CF1E /* CurrentCoordinator.swift in Sources */,

@@ -7,4 +7,9 @@ struct Forecast: Codable {
     let longitude: Double
     let timezone: String
     let currently: Weather
+    let hourly: Hourly
+}
+
+struct Hourly: Codable {
+    let data: [Weather]
 }

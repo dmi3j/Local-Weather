@@ -17,7 +17,7 @@ protocol CurrentViewModel: ViewModel {
 
     var mainWeatherInfo: WeatherMainInfo? { get }
     var itemsCount: Int { get }
-    func item(at index: Int) -> WeatherMinorInfo?
+    func item(at index: Int) -> WeatherMainInfo?
     func requestLocationUpdate()
 }
 
@@ -27,7 +27,7 @@ final class CurrentViewModelClass: NSObject, CurrentViewModel {
     private var latitude: Double = 0 // check Null Island weather, if not know where you are
     private var longitude: Double = 0 // check Null Island weather, if not know where you are
     private var forecast: Forecast?
-    private var items = [WeatherMinorInfo]()
+    private var items = [WeatherMainInfo]()
     private var isRequestInProgress = false
     private lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -50,7 +50,7 @@ final class CurrentViewModelClass: NSObject, CurrentViewModel {
         return items.count
     }
 
-    func item(at index: Int) -> WeatherMinorInfo? {
+    func item(at index: Int) -> WeatherMainInfo? {
         return items.indices.contains(index) ? items[index] : nil
     }
 
@@ -92,7 +92,7 @@ private extension CurrentViewModelClass {
     }
     
     func prepareViewModel() {
-        items = [WeatherMinorInfo]()
+        items = [WeatherMainInfo]()
 
         guard let forecast = forecast else {
             mainWeatherInfo = WeatherMainInfo(title: "---", temperature: "---", summary: "---", iconName: "")
@@ -105,8 +105,16 @@ private extension CurrentViewModelClass {
                                           summary: forecast.currently.summary,
                                           iconName: forecast.currently.icon)
 
-        items.append(WeatherMinorInfo(title: "Pressure", value: "\(Int(forecast.currently.pressure.rounded())) hPa"))
-        items.append(WeatherMinorInfo(title: "UV Index", value: "\(forecast.currently.uvIndex)"))
+        forecast.hourly.data.forEach { (weather) in
+            let item = WeatherMainInfo(title: "",
+                                       temperature: "\(Int(weather.temperature.rounded()))℃",
+                summary: weather.summary,
+                iconName: weather.icon)
+
+            items.append(item)
+        }
+//        items.append(WeatherMinorInfo(title: "Pressure", value: "\(Int(forecast.currently.pressure.rounded())) hPa"))
+//        items.append(WeatherMinorInfo(title: "UV Index", value: "\(forecast.currently.uvIndex)"))
         viewDelegate?.reloadData()
     }
 

@@ -43,7 +43,7 @@ private extension CurrentViewController {
 extension CurrentViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1 + (viewModel?.itemsCount ?? 0)
+        return 2// 1 + (viewModel?.itemsCount ?? 0)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -56,12 +56,13 @@ extension CurrentViewController: UITableViewDataSource {
             return cell
         }
 
-        guard let data = viewModel?.item(at: indexPath.row - 1) else { return UITableViewCell() }
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MinorInfoCell",
-                                                       for: indexPath) as? MinorInfoCell else {
+//        guard let data = viewModel?.item(at: indexPath.row - 1) else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ScrollableCell",
+                                                       for: indexPath) as? ScrollableCell else {
                                                         return UITableViewCell()
         }
-        cell.data = data
+//        cell.data = data
+        cell.viewModel = viewModel
         return cell
     }
 }
